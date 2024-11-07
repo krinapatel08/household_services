@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Edit Service
+{% endblock %}
+
+{% block content %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Admin Dashboard</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/admin_dashboard">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin_dashboard/search">Search</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin_dashboard/summary">Summary</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-4">
+    <h2>Edit Service</h2>
+    
+    <!-- Edit Service Form -->
+    <form action="/admin_dashboard/edit-service/{{ service.id }}" method="POST">
+        <!-- CSRF token for security, if you're using Flask or Django -->
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+        <div class="form-group">
+            <label for="service_name">Service Name:</label>
+            <input type="text" class="form-control" id="service_name" name="service_name" value="{{ service.service_name }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="service_description">Service Description:</label>
+            <textarea class="form-control" id="service_description" name="service_description" required>{{ service.service_description }}</textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="base_price">Base Price:</label>
+            <input type="text" class="form-control" id="base_price" name="base_price" value="{{ service.base_price }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="time_required">Time Required:</label>
+            <input type="text" class="form-control" id="time_required" name="time_required" value="{{ service.time_required }}" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3">Update Service</button>
+    </form>
+</div>
+
+{% endblock %}
